@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CacheService {
 
-    @Cacheable("calc")
+    @Cacheable(cacheNames = "calc", key = "#a.toString()+#b.toString()")
     public int multiply(int a, int b) {
         int c = a * b;
         log.info("{} * {} = {}", a, b, c);
         return c;
     }
+
 
 }

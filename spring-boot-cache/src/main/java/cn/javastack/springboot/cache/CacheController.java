@@ -1,6 +1,7 @@
 package cn.javastack.springboot.cache;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +20,11 @@ public class CacheController {
                         @RequestParam("b") int b) {
         return cacheService.multiply(a, b);
     }
-    
+
+    @CacheEvict(value = "calc", key = "#a.toString()+#b.toString()")
+    @RequestMapping("/clear")
+    public void clearCache(@RequestParam("a") int a,
+                           @RequestParam("b") int b) {
+
+    }
 }
